@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:11:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/01/19 17:37:01 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/01 15:46:28 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	t_game_map	*game_map;
 	int			map_length;
 	int			map_height;
-	
+
 	if (!get_map(ac, av, &game_map))
 	{
 	}
