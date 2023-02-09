@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:09 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/17 15:25:42 by etlaw             #+#    #+#             */
+/*   Updated: 2022/10/17 15:27:20 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <mlx.h>
-# include "./libft/libft.h"
-# include "get_next_line.h"
-
-typedef struct s_point
+void	ft_putnbr_fd(int n, int fd)
 {
-	int			x;
-	int			y;
-}	t_point;
-
-typedef struct s_game
-{
-	int		map_height;
-	int		map_length;
-	char	**map;
-	int		total_c;
-	int		player_x;
-	int		player_y;
-	void	*mlx;
-	void	*win;
-}	t_game;
-
-int		get_map(int ac, char **av, t_game *game);
-
-#endif
+	if (n == -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	while (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		n = n % 10;
+	}
+	ft_putchar_fd(n + 48, fd);
+}

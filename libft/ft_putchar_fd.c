@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:09 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/17 14:07:32 by etlaw             #+#    #+#             */
+/*   Updated: 2022/10/20 17:33:20 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <mlx.h>
-# include "./libft/libft.h"
-# include "get_next_line.h"
-
-typedef struct s_point
+void	ft_putchar_fd(char c, int fd)
 {
-	int			x;
-	int			y;
-}	t_point;
-
-typedef struct s_game
-{
-	int		map_height;
-	int		map_length;
-	char	**map;
-	int		total_c;
-	int		player_x;
-	int		player_y;
-	void	*mlx;
-	void	*win;
-}	t_game;
-
-int		get_map(int ac, char **av, t_game *game);
-
-#endif
+	write(fd, &c, 1);
+}

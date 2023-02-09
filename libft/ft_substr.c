@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:11:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:43:48 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/13 11:42:39 by etlaw             #+#    #+#             */
+/*   Updated: 2022/10/22 20:06:31 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-#include <stdio.h>
+#include "libft.h"
 
-static int	exit_with_error(void)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	ft_putendl_fd("Error", 2);
-	ft_putstr_fd("The map is invalid or the file was not found. ", 2);
-	ft_putstr_fd("Also check the file ending.", 2);
-	return (1);
-}
+	size_t	i;
+	size_t	len2;
+	char	*subs;
 
-int	main(int ac, char **av)
-{
-	t_game		game;
-	int			map_length;
-	int			map_height;
-
-	if (get_map(ac, av, &game))
+	i = 0;
+	if (!s)
+		return (0);
+	len2 = ft_strlen(s);
+	if (len2 < (size_t)start)
+		return (ft_strdup(""));
+	if (len2 < len)
+		len = len2;
+	subs = (char *)malloc(sizeof(char) * len + 1);
+	if (!subs)
+		return (0);
+	while (i < len)
 	{
-		
+		subs[i] = s[start + i];
+		i++;
 	}
-	exit_with_error();
-	return (0);
+	subs[i] = '\0';
+	return (subs);
 }

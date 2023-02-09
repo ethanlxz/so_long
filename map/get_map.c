@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:00:02 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/02 15:47:55 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:45:14 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 
 // Reads and copy the map file into a double array
 
-static int	read_map_file(char *fn,	int *height,
-int *length, t_game_map **game_map)
+int	read_map_file(char *fn,	int *height,
+int *length, t_game *game)
 {
 	int		fd;
 	char	*line;
 	char	*buffer;
 
 	line = 0;
-	*height = 0;
-	*length - 0;
+	height = 0;
+	length = 0;
 	fd = open(fn, O_RDONLY);
 	if (fd < 0)
-		return (0);
-	(*game_map)->map = malloc(sizeof(char **));
-	if (!(*game_map)->map)
 		return (0);
 	while (1)
 	{
@@ -36,10 +33,12 @@ int *length, t_game_map **game_map)
 		if (buffer == NULL)
 			break ;
 		line = ft_strjoin(line, buffer);
+		free(buffer);
 		height++;
 	}
-	(*game_map)->map = ft_split(line, '/n');
-	length = ft_strlen((*game_map)->map[0]);
+	game->map = ft_split(line, '\n');
+	length = ft_strlen(game->map[0]);
+	free(line);
 	close (fd);
 	return (1);
 }
@@ -58,23 +57,25 @@ static int	check_name(char *filename)
 	return (0);
 }
 
-int	get_map(int ac, char **av, t_game_map **game_map)
+// get_map
+
+int	get_map(int ac, char **av, t_game *game)
 {
 	int	map_l;
 	int	map_h;
 
-	(*game_map) = malloc(sizeof(t_game_map));
-	if (ac != 1 && check_name(av[1]))
+	if (ac == 2 && check_name(av[1]))
 	{
-		if (!read_map_file(av[1], &map_l, &map_h, game_map))
+		if (!read_map_file(av[1], &map_l, &map_h, game))
 		{
-			free((*game_map));
-			(*game_map) = NULL;
+			free(game);
+			game = NULL;
 			return (0);
 		}
-		(*game_map)->map_height = map_h;
-		(*game_map)->map_length = map_l;
-		if (check_map(game_map))
+		game->map_height = map_h;
+		game->map_length = map_l;
+		if (check_map(game))
 			return (1);
 	}
+	return (0);
 }

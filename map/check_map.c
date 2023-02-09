@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:05:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/02 17:34:27 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/09 15:43:30 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 // Checks if the map is a rectangular
 
-static int	check_length(t_game_map *game_map)
+static int	check_length(t_game *game)
 {
 	int	len;
 	int	row;
 
-	while (row <= game_map->map_height)
+	while (row <= game->map_height)
 	{
-		len = ft_strlen(game_map->map[row]);
-		if (len != game_map->map_length)
+		len = ft_strlen(game->map[row]);
+		if (len != game->map_length)
+			return (0);
+		if (len == game->map_height)
 			return (0);
 		row++;
 		len = 0;
@@ -32,34 +34,34 @@ static int	check_length(t_game_map *game_map)
 
 // Checks if the map is surrounded by walls
 
-static int	check_wall(t_game_map *game_map)
+static int	check_wall(t_game *game)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	while (game_map->map[0][y] != '\0'
-	&& game_map->map[game_map->map_length - 1][y] != '\0')
+	x = 0;
+	while (game->map[0][x] != '\0'
+	&& game->map[game->map_height - 1][x] != '\0')
 	{
-		if (game_map->map[0][y] != '1' ||
-		game_map->map[game_map->map_length - 1][y] != '1')
-			return (0);
-		y++;
-	}
-	x = 1;
-	while (game_map->map[x] != '\0')
-	{
-		if (game_map->map[x][0] != '1' ||
-		game_map->map[x][game_map->map_height - 1] != '1')
+		if (game->map[0][x] != '1' ||
+		game->map[game->map_height - 1][x] != '1')
 			return (0);
 		x++;
+	}
+	y = 1;
+	while (game->map[y] != '\0')
+	{
+		if (game->map[y][0] != '1' ||
+		game->map[y][game->map_length - 1] != '1')
+			return (0);
+		y++;
 	}
 	return (1);
 }
 
 // Counts the total 'C' and ensure 'P' and 'E' is not more than 1 or less than 0
 
-static int	count_pec(t_game_map *game_map)
+static int	count_pec(t_game *game)
 {
 	int	x;
 	int	y;
@@ -68,50 +70,69 @@ static int	count_pec(t_game_map *game_map)
 
 	p = 0;
 	e = 0;
-	game_map->total_c = 0;
+	game->total_c = 0;
 	x = -1;
-	while (game_map->map[++x] != '\0')
+	while (game->map[++x] != '\0')
 	{
 		y = -1;
-		while (game_map->map[x][++y] != '\0')
+		while (game->map[x][++y] != '\0')
 		{
-			if (game_map->map[x][y] == 'P')
+			if (game->map[x][y] == 'P')
 				p++;
-			else if (game_map->map[x][y] == 'E')
+			else if (game->map[x][y] == 'E')
 				e++;
-			else if (game_map->map[x][y] == 'C')
-				game_map->total_c++;
+			else if (game->map[x][y] == 'C')
+				game->total_c++;
 		}
 	}
-	if (p != 1 || game_map->total_c == 0 || e == 0)
+	if (p != 1 || game->total_c == 0 || e == 0)
 		return (0);
 	return (1);
 }
 
 // Checks the map for any char other than "PEC01"
+// and checks amount of 'N' for enemy
+// 'N' must be not more than 1
 
 static int	check_format(char **map)
 {
 	int	x;
 	int	y;
+	int	n;
 
 	x = 0;
+	n = 0;
 	while (map[x] != '\0')
 	{
 		y = 0;
 		while (map[x][y] != '\0')
 		{
-			if (map[x][y] != 'P' && map[x][y] != 'E' && map != 'C'
-			&& map[x][y] != '0' && map[x][y] != '1')
+			if (map[x][y] != 'P' && map[x][y] != 'E' && map[x][y] != 'C'
+			&& map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N')
 				return (0);
+			if (map[x][y] == 'N')
+				n++;
 			y++;
 		}
 		x++;
 	}
-	return (1);
+	if (n > 1)
+		return (0);
+	else
+		return (1);
 }
 
-int	check_map(t_game_map *game_map)
+int	check_map(t_game *game)
 {
-	
+	if (!check_length(game))
+		return (0);
+	else if (!check_wall(game))
+		return (0);
+	else if (!count_pec(game))
+		return (0);
+	else if (!check_format(game->map))
+		return (0);
+	else if (!path_checker(game))
+		return (0);
+	return (1);
 }

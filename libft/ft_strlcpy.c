@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:09 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/11 16:55:14 by etlaw             #+#    #+#             */
+/*   Updated: 2022/10/20 17:53:56 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <mlx.h>
-# include "./libft/libft.h"
-# include "get_next_line.h"
-
-typedef struct s_point
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int			x;
-	int			y;
-}	t_point;
+	size_t	index;
 
-typedef struct s_game
-{
-	int		map_height;
-	int		map_length;
-	char	**map;
-	int		total_c;
-	int		player_x;
-	int		player_y;
-	void	*mlx;
-	void	*win;
-}	t_game;
-
-int		get_map(int ac, char **av, t_game *game);
-
-#endif
+	index = 0;
+	if (dstsize == 0)
+	{
+		while (src[index])
+			++index;
+		return (index);
+	}
+	while (index < dstsize - 1 && src[index] != '\0')
+	{
+		dst[index] = src[index];
+		++index;
+	}
+	if (index < dstsize)
+		dst[index] = '\0';
+	while (src[index] != '\0')
+		++index;
+	return (index);
+}

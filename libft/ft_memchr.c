@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:09 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/12 17:53:27 by etlaw             #+#    #+#             */
+/*   Updated: 2022/10/20 18:00:49 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-# include <mlx.h>
-# include "./libft/libft.h"
-# include "get_next_line.h"
-
-typedef struct s_point
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int			x;
-	int			y;
-}	t_point;
+	unsigned char	*s_char;
+	unsigned char	c_char;
+	size_t			index;
 
-typedef struct s_game
-{
-	int		map_height;
-	int		map_length;
-	char	**map;
-	int		total_c;
-	int		player_x;
-	int		player_y;
-	void	*mlx;
-	void	*win;
-}	t_game;
-
-int		get_map(int ac, char **av, t_game *game);
-
-#endif
+	s_char = (unsigned char *)s;
+	c_char = (unsigned char)c;
+	index = 0;
+	while (index < n)
+	{
+		if (s_char[index] == c_char)
+			return ((void *)s);
+		++s;
+		++index;
+	}
+	return (0);
+}

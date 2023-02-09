@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:39:09 by etlaw            ###   ########.fr       */
+/*   Created: 2022/10/25 20:22:17 by etlaw             #+#    #+#             */
+/*   Updated: 2023/02/06 14:04:23 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../libft.h"
 
-# include <mlx.h>
-# include "./libft/libft.h"
-# include "get_next_line.h"
-
-typedef struct s_point
+int	ft_printf(const char *format, ...)
 {
-	int			x;
-	int			y;
-}	t_point;
+	va_list	args;
+	int		i;
+	int		length;
 
-typedef struct s_game
-{
-	int		map_height;
-	int		map_length;
-	char	**map;
-	int		total_c;
-	int		player_x;
-	int		player_y;
-	void	*mlx;
-	void	*win;
-}	t_game;
-
-int		get_map(int ac, char **av, t_game *game);
-
-#endif
+	i = 0;
+	length = 0;
+	va_start(args, format);
+	while (format[i] != 0)
+	{
+		if (format[i] == '%')
+		{
+			length += ft_convert(args, format[i + 1]);
+			i++;
+		}
+		else
+			length += ft_putchar(format[i]);
+		i++;
+	}
+	va_end(args);
+	return (length);
+}
