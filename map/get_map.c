@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:00:02 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:45:14 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:50:34 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Reads and copy the map file into a double array
 
-int	read_map_file(char *fn,	int *height,
+static int	read_map_file(char *fn,	int *height,
 int *length, t_game *game)
 {
 	int		fd;
@@ -37,7 +37,7 @@ int *length, t_game *game)
 		height++;
 	}
 	game->map = ft_split(line, '\n');
-	length = ft_strlen(game->map[0]);
+	*length = ft_strlen(game->map[0]);
 	free(line);
 	close (fd);
 	return (1);

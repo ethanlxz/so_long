@@ -6,12 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:11:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:43:48 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:44:54 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 static int	exit_with_error(void)
 {
@@ -24,12 +23,11 @@ static int	exit_with_error(void)
 int	main(int ac, char **av)
 {
 	t_game		game;
-	int			map_length;
-	int			map_height;
 
 	if (get_map(ac, av, &game))
 	{
-		
+		game_init(&game);
+		mlx_loop(game.mlx);
 	}
 	exit_with_error();
 	return (0);

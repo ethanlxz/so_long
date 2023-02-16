@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:24:21 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/06 13:58:57 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:49:47 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_isdigit(int a);
 int		ft_isalnum(int a);
 int		ft_isascii(int a);
 int		ft_isprint(int a);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

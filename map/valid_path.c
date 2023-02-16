@@ -6,15 +6,15 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:45:38 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:47:00 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:48:29 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 // free the map double array 
 
-void	free_map_data(char **map_data, int size)
+void	free_map(char **map_data, int size)
 {
 	int	count;
 
@@ -36,10 +36,10 @@ int	player_pos(t_game *game)
 	int	y;
 
 	y = 0;
-	while (game->map[y] != '\0')
+	while (game->map[y] != 0)
 	{
 		x = 0;
-		while (game->map[y][x] != '\0')
+		while (game->map[y][x] != 0)
 		{
 			if (game->map[y][x] == 'P')
 			{
@@ -84,10 +84,10 @@ int	check_e(char **map)
 	int	y;
 
 	y = 0;
-	while (map[y] != '\0')
+	while (map[y] != 0)
 	{
 		x = 0;
-		while (map[y][x] != '\0')
+		while (map[y][x] != 0)
 		{
 			if (map[y][x] == 'E')
 				return (0);
@@ -106,16 +106,19 @@ int	path_checker(t_game *game)
 	t_point	size;
 	t_point	begin;
 
-	player_pos(map);
+	map = NULL;
+	player_pos(game);
 	map = map_dup(game);
-	size = {game->map_length, game->map_height};
-	begin = {game->player_x, game->player_y};
-	floodfill(map, size, begin);
+	size.x = game->map_length;
+	size.y = game->map_height;
+	begin.x = game->player_x;
+	begin.y = game->player_y;
+	flood_fill(map, size, begin);
 	if (!check_e(map))
 	{
-		free_map_data(map, game->map_height);
+		free_map(map, game->map_height);
 		return (0);
 	}
-	free_map_data(map, game->map_height);
+	free_map(map, game->map_height);
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:24:53 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/06 18:57:05 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:42:25 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "so_long.h"
+#include  "../so_long.h"
 
 // from exam 02 level 4 but improvised for so_long
 

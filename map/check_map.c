@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:05:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/09 15:43:30 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/16 17:42:02 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	check_length(t_game *game)
 	int	len;
 	int	row;
 
+	row = 0;
 	while (row <= game->map_height)
 	{
 		len = ft_strlen(game->map[row]);
@@ -40,8 +41,8 @@ static int	check_wall(t_game *game)
 	int	y;
 
 	x = 0;
-	while (game->map[0][x] != '\0'
-	&& game->map[game->map_height - 1][x] != '\0')
+	while (game->map[0][x] != 0
+	&& game->map[game->map_height - 1][x] != 0)
 	{
 		if (game->map[0][x] != '1' ||
 		game->map[game->map_height - 1][x] != '1')
@@ -49,7 +50,7 @@ static int	check_wall(t_game *game)
 		x++;
 	}
 	y = 1;
-	while (game->map[y] != '\0')
+	while (game->map[y] != 0)
 	{
 		if (game->map[y][0] != '1' ||
 		game->map[y][game->map_length - 1] != '1')
@@ -72,10 +73,10 @@ static int	count_pec(t_game *game)
 	e = 0;
 	game->total_c = 0;
 	x = -1;
-	while (game->map[++x] != '\0')
+	while (game->map[++x] != 0)
 	{
 		y = -1;
-		while (game->map[x][++y] != '\0')
+		while (game->map[x][++y] != 0)
 		{
 			if (game->map[x][y] == 'P')
 				p++;
@@ -102,10 +103,10 @@ static int	check_format(char **map)
 
 	x = 0;
 	n = 0;
-	while (map[x] != '\0')
+	while (map[x] != 0)
 	{
 		y = 0;
-		while (map[x][y] != '\0')
+		while (map[x][y] != 0)
 		{
 			if (map[x][y] != 'P' && map[x][y] != 'E' && map[x][y] != 'C'
 			&& map[x][y] != '0' && map[x][y] != '1' && map[x][y] != 'N')
