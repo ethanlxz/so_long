@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:45:38 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/18 00:03:17 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/18 17:44:49 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	player_pos(t_game *game)
 			{
 				game->player_x = x;
 				game->player_y = y;
-				// printf("checking playerx%d playery%d \n",game->player_x, game->player_y);
 				return (1);
 			}
 			x++;
@@ -63,7 +62,6 @@ char	**map_dup(t_game *game)
 	int		i;
 
 	i = 0;
-	// map = malloc(sizeof(char *) * 10000);
 	map = malloc(sizeof(char *) * (game->map_height + 1));
 	if (map == NULL)
 		return (NULL);
@@ -92,10 +90,7 @@ int	check_e(char **map)
 		while (map[y][x] != 0)
 		{
 			if (map[y][x] == 'E')
-			{
-				printf("E: %d %d\n", x, y);
 				return (0);
-			}
 			x++;
 		}
 		y++;
@@ -113,7 +108,6 @@ int	path_checker(t_game *game)
 
 	map = NULL;
 	player_pos(game);
-	// printf("chekcing 5 \n");
 	map = map_dup(game);
 	size.x = game->map_length;
 	size.y = game->map_height;

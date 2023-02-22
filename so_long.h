@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/17 23:11:43 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/21 22:09:53 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_game
 	int		moves;
 	int		player_x;
 	int		player_y;
+	int		enemy_x;
+	int		enemy_y;
 	void	*mlx;
 	void	*win;
 	void	*img_backg;
@@ -65,12 +67,34 @@ void	flood_fill(char **map, t_point size, t_point begin);
 
 int		check_map(t_game *game);
 
+void	free_map(char **map_data, int size);
+
+int		check_newline(t_game *game);
+
 void	game_init(t_game *game);
 
+void	exit_game(t_game *game);
+
 int		map_draw(t_game	*game);
+void	tombstone_draw(t_game *game);
+
+void	game_play(t_game *game);
+
+void	player_w(t_game *game);
+void	player_a(t_game *game);
+void	player_s(t_game *game);
+void	player_d(t_game *game);
+
+void	enemy_w(t_game *game);
+void	enemy_a(t_game *game);
+void	enemy_s(t_game *game);
+void	enemy_d(t_game *game);
 
 int		path_checker(t_game *game);
 
 void	flood_fill(char **map, t_point size, t_point begin);
+
+void	display_moves(char who, t_game *game);
+void	display_title(t_game *game);
 
 #endif

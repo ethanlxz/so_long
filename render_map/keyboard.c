@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:50:43 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/17 16:03:13 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/21 22:10:36 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,27 @@ static void	player_key(int keycode, t_game *game)
 	}
 }
 
-static void	player_key(int keycode, t_game *game)
+static void	enemy_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_UP)
 	{
-		game->player_y -= 1;
-		player_w(game);
+		game->enemy_y -= 1;
+		enemy_w(game);
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		game->player_y += 1;
-		player_s(game);
+		game->enemy_y += 1;
+		enemy_s(game);
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		game->player_x += 1;
-		player_d(game);
+		game->enemy_x += 1;
+		enemy_d(game);
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		game->player_x -= 1;
-		player_a(game);
+		game->enemy_x -= 1;
+		enemy_a(game);
 	}
 }
 
@@ -66,15 +66,23 @@ static int	keypress(int keycode, t_game *game)
 		exit_game(game);
 	else if (keycode == KEY_W || keycode == KEY_A
 		|| keycode == KEY_S || keycode == KEY_D)
+	{
 		player_key(keycode, game);
+		display_title(game);
+		display_moves('P', game);
+	}
 	else if (keycode == KEY_UP || keycode == KEY_DOWN
 		|| keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	{
 		enemy_key(keycode, game);
+		display_title(game);
+		display_moves('E', game);
+	}
 	return (0);
 }
 
-void	gameplay(t_game *game)
+void	game_play(t_game *game)
 {
 	mlx_hook(game->win, 2, 1L << 0, keypress, game);
-	//mlx_loop_hook(game->mlx, animation, game);
+	mlx_loop_hook(game->mlx, keypress, game);
 }

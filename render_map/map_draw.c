@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 17:26:10 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/16 17:44:06 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/21 21:56:22 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	img_draw(t_game *game, void *image, int x, int y)
 {
 	mlx_put_image_to_window
-		(game->mlx, game->win, image, x * 32, y * 32 + 32);
+		(game->mlx, game->win, image, x * 64, y * 64 + 64);
 }
 
 // sets the player pos and then img_draw
@@ -26,6 +26,15 @@ static void	player_draw(t_game *game, void *image, int x, int y)
 {
 	game->player_x = x;
 	game->player_y = y;
+	img_draw(game, image, x, y);
+}
+
+// sets the enemy pos and then img_draw
+
+static void	enemy_draw(t_game *game, void *image, int x, int y)
+{
+	game->enemy_x = x;
+	game->enemy_y = y;
 	img_draw(game, image, x, y);
 }
 
@@ -53,7 +62,7 @@ int	map_draw(t_game	*game)
 			else if (game->map[y][x] == 'E')
 				img_draw(game, game->img_e, x, y);
 			else if (game->map[y][x] == 'N')
-				img_draw(game, game->img_n, x, y);
+				enemy_draw(game, game->img_n, x, y);
 		}
 	}
 	return (0);

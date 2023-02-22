@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:24:53 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/18 00:20:31 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/18 17:27:58 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	fill(char **map, t_point size, t_point begin)
 
 void	flood_fill(char **map, t_point size, t_point begin)
 {
-	printf("checking y%d x%d\n", begin.y, begin.x);
 	fill(map, size, begin);
 }
   

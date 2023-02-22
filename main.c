@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:11:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/17 23:11:38 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/20 20:36:51 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	main(int ac, char **av)
 
 	if (get_map(ac, av, &game))
 	{
-		printf("checking \n");
 		game_init(&game);
+		game_play(&game);
 		mlx_loop(game.mlx);
 	}
 	exit_with_error();
-	// system("leaks -q so_long.a");
+	//system("leaks -q so_long.a");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:05:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/18 00:01:59 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/21 19:36:51 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ static int	check_format(char **map)
 
 int	check_map(t_game *game)
 {
+	if (!check_newline(game))
+		return (0);
 	if (!check_length(game))
 		return (0);
 	if (!check_wall(game))
@@ -137,6 +139,5 @@ int	check_map(t_game *game)
 		return (0);
 	if (!path_checker(game))
 		return (0);
-	printf("checking3 \n");
 	return (1);
 }
