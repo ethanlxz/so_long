@@ -6,17 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:46:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/22 17:20:28 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/26 20:14:49 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	temp(t_game *game)
-{
-	(void)game;
-	return ;
-}
 
 // changes the image of 'P' whenever "WASD" is pressed 
 
@@ -57,12 +51,12 @@ void	player_w(t_game *game)
 		mlx_clear_window(game->mlx, game->win);
 		game->map[game->player_y + 1][game->player_x] = '0';
 		game->moves++;
-		map_draw(game);
+		ft_printf("\033[0;32mYou won! :D\n\033[0m");
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
-		// rip_draw(game);
+		// exit_game(game);
+		rip(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_y += 1;
@@ -86,12 +80,12 @@ void	player_s(t_game *game)
 		mlx_clear_window(game->mlx, game->win);
 		game->map[game->player_y - 1][game->player_x] = '0';
 		game->moves++;
-		map_draw(game);
+		ft_printf("\033[0;32mYou won! :D\n\033[0m");
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
-		// rip_draw(game);
+		// exit_game(game);
+		rip(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_y -= 1;
@@ -115,12 +109,12 @@ void	player_d(t_game *game)
 		mlx_clear_window(game->mlx, game->win);
 		game->map[game->player_y][game->player_x - 1] = '0';
 		game->moves++;
-		map_draw(game);
+		ft_printf("\033[0;32mYou won! :D\n\033[0m");
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
-		// rip_draw(game);
+		// exit_game(game);
+		rip(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_x -= 1;
@@ -144,12 +138,12 @@ void	player_a(t_game *game)
 		mlx_clear_window(game->mlx, game->win);
 		game->map[game->player_y][game->player_x + 1] = '0';
 		game->moves++;
-		map_draw(game);
+		ft_printf("\033[0;32mYou won! :D\n\033[0m");
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
-		// rip_draw(game);
+		// exit_game(game);
+		rip(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_x += 1;

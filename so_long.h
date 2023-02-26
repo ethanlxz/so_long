@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/21 22:09:53 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/24 17:52:05 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_game
 	void	*img_c;
 	void	*img_n;
 	void	*img_e;
+	void	*img_rip1;
+	int		rip_anim;
 }	t_game;
 
 # define KEY_ESC 53
@@ -96,5 +98,7 @@ void	flood_fill(char **map, t_point size, t_point begin);
 
 void	display_moves(char who, t_game *game);
 void	display_title(t_game *game);
+
+void	rip(t_game *game);
 
 #endif

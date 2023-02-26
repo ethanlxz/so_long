@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 19:41:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/22 17:27:57 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/26 20:09:24 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	enemy_update_image(char key, t_game *game)
 void	enemy_w(t_game *game)
 {
 	enemy_update_image('w', game);
-	if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
+	if (game->map[game->enemy_y][game->enemy_x] == 'P')
+		rip(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -50,8 +50,8 @@ void	enemy_w(t_game *game)
 void	enemy_a(t_game *game)
 {
 	enemy_update_image('a', game);
-	if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
+	if (game->map[game->enemy_y][game->enemy_x] == 'P')
+		rip(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -68,8 +68,8 @@ void	enemy_a(t_game *game)
 void	enemy_s(t_game *game)
 {
 	enemy_update_image('s', game);
-	if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
+	if (game->map[game->enemy_y][game->enemy_x] == 'P')
+		rip(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -86,8 +86,8 @@ void	enemy_s(t_game *game)
 void	enemy_d(t_game *game)
 {
 	enemy_update_image('d', game);
-	if (game->map[game->player_y][game->player_x] == 'N')
-		exit_game(game);
+	if (game->map[game->enemy_y][game->enemy_x] == 'P')
+		rip(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')

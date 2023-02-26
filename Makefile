@@ -6,7 +6,7 @@
 #    By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/09 17:45:00 by etlaw             #+#    #+#              #
-#    Updated: 2023/02/21 21:53:47 by etlaw            ###   ########.fr        #
+#    Updated: 2023/02/22 18:08:29 by etlaw            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MAPTOOLS = ./get_map/get_map.c ./get_map/check_map.c ./get_map/floodfill.c ./get
 
 
 RENDERSRC = ./render_map/game_init.c ./render_map/map_draw.c ./render_map/player_move.c ./render_map/keyboard.c ./render_map/exit_game.c \
-			./render_map/show_moves.c ./render_map/enemy_move.c
+			./render_map/show_moves.c ./render_map/enemy_move.c ./render_map/rip_draw.c
 
 LIBFTPATH = ./libft/
 

@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:04:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/22 17:11:30 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/26 20:02:42 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	game_init(t_game *game)
 	game->win = mlx_new_window
 		(game->mlx, game->map_length, game->map_height, "so_long");
 	game->moves = 0;
+	game->rip_anim = 1;
 	img_init(game);
 	get_enemy_pos(game);
 	map_draw(game);
