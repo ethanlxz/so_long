@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:11:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 16:30:13 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:57:23 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int ac, char **av)
 		mlx_loop(game.mlx);
 	}
 	exit_with_error();
-	// system("leaks -q so_long.a");
+	system("leaks -q so_long.a");
 	return (0);
 }
