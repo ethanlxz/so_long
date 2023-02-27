@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:24:53 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/18 17:27:58 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 22:00:09 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	flood_fill(char **map, t_point size, t_point begin)
 {
 	fill(map, size, begin);
 }
-  
