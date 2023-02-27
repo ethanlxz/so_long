@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:46:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/26 20:14:49 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:47:08 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@
 
 static void	player_update_image(char key, t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->img_p);
 	if (key == 'w')
 		game->img_p = mlx_xpm_file_to_image
-			(game->mlx, "assets/PR.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/PR.xpm", &game->img_l, &game->img_h);
 	else if (key == 's')
 		game->img_p = mlx_xpm_file_to_image
-			(game->mlx, "assets/PL.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/PL.xpm", &game->img_l, &game->img_h);
 	else if (key == 'd')
 		game->img_p = mlx_xpm_file_to_image
-			(game->mlx, "assets/PR.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/PR.xpm", &game->img_l, &game->img_h);
 	else if (key == 'a')
 		game->img_p = mlx_xpm_file_to_image
-			(game->mlx, "assets/PL.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/PL.xpm", &game->img_l, &game->img_h);
 }
 
 // First "IF" checks whether player is going to exit 
@@ -40,7 +39,7 @@ static void	player_update_image(char key, t_game *game)
 // Third "ELSE IF" checks whether player is going into a wall
 // or exit which can't be exited due to uncollected collectibles.
 
-// Fourth "ELSE" just let the player roam around the map
+// "ELSE" just let the player roam around the map
 // and collect collectibles.
 
 void	player_w(t_game *game)
@@ -55,8 +54,7 @@ void	player_w(t_game *game)
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		// exit_game(game);
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_y += 1;
@@ -84,8 +82,7 @@ void	player_s(t_game *game)
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		// exit_game(game);
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_y -= 1;
@@ -113,8 +110,7 @@ void	player_d(t_game *game)
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		// exit_game(game);
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_x -= 1;
@@ -142,8 +138,7 @@ void	player_a(t_game *game)
 		exit_game(game);
 	}
 	else if (game->map[game->player_y][game->player_x] == 'N')
-		// exit_game(game);
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->player_y][game->player_x] == '1'
 			|| game->map[game->player_y][game->player_x] == 'E')
 		game->player_x += 1;

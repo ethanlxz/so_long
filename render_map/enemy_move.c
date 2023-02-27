@@ -6,34 +6,45 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 19:41:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/26 20:09:24 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:47:22 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+// changes the image of 'N' whenever arrow keys is pressed
+
 static void	enemy_update_image(char key, t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->img_n);
 	if (key == 'w')
 		game->img_n = mlx_xpm_file_to_image
-			(game->mlx, "assets/NR.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/NR.xpm", &game->img_l, &game->img_h);
 	else if (key == 's')
 		game->img_n = mlx_xpm_file_to_image
-			(game->mlx, "assets/NL.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/NL.xpm", &game->img_l, &game->img_h);
 	else if (key == 'd')
 		game->img_n = mlx_xpm_file_to_image
-			(game->mlx, "assets/NR.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/NR.xpm", &game->img_l, &game->img_h);
 	else if (key == 'a')
 		game->img_n = mlx_xpm_file_to_image
-			(game->mlx, "assets/NL.xpm", &game->img_l, &game->img_h);
+			(game->mlx, "textures/NL.xpm", &game->img_l, &game->img_h);
 }
+
+// First "IF" enemy touches the player then player dies
+
+// Second "IF" enemy touches collectibles, walls and exit,
+// enemy remains in the same position
+
+// "ELSE" lets the enemy roam around the map
 
 void	enemy_w(t_game *game)
 {
 	enemy_update_image('w', game);
 	if (game->map[game->enemy_y][game->enemy_x] == 'P')
-		rip(game);
+	{
+		ft_printf("\033[0;31mYou lost ! D:\n\033[0m");
+		lose_game(game);
+	}
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -51,7 +62,7 @@ void	enemy_a(t_game *game)
 {
 	enemy_update_image('a', game);
 	if (game->map[game->enemy_y][game->enemy_x] == 'P')
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -69,7 +80,7 @@ void	enemy_s(t_game *game)
 {
 	enemy_update_image('s', game);
 	if (game->map[game->enemy_y][game->enemy_x] == 'P')
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')
@@ -87,7 +98,7 @@ void	enemy_d(t_game *game)
 {
 	enemy_update_image('d', game);
 	if (game->map[game->enemy_y][game->enemy_x] == 'P')
-		rip(game);
+		lose_game(game);
 	else if (game->map[game->enemy_y][game->enemy_x] == '1'
 			|| game->map[game->enemy_y][game->enemy_x] == 'C'
 			|| game->map[game->enemy_y][game->enemy_x] == 'E')

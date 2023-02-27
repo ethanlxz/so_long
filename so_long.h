@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/24 17:52:05 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:46:24 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <mlx.h>
 # include "./libft/libft.h"
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct s_point
 {
@@ -47,7 +47,7 @@ typedef struct s_game
 	void	*img_n;
 	void	*img_e;
 	void	*img_rip1;
-	int		rip_anim;
+	int		c_anim;
 }	t_game;
 
 # define KEY_ESC 53
@@ -76,6 +76,7 @@ int		check_newline(t_game *game);
 void	game_init(t_game *game);
 
 void	exit_game(t_game *game);
+void	lose_game(t_game *game);
 
 int		map_draw(t_game	*game);
 void	tombstone_draw(t_game *game);
@@ -100,5 +101,7 @@ void	display_moves(char who, t_game *game);
 void	display_title(t_game *game);
 
 void	rip(t_game *game);
+
+int		animation(t_game *game);
 
 #endif

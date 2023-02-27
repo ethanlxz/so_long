@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:04:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/26 20:02:42 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:35:00 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 static void	img_init(t_game *game)
 {
 	game->img_backg = mlx_xpm_file_to_image
-		(game->mlx, "assets/0.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/0.xpm", &game->img_l, &game->img_h);
 	game->img_wall = mlx_xpm_file_to_image
-		(game->mlx, "assets/1.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/1.xpm", &game->img_l, &game->img_h);
 	game->img_p = mlx_xpm_file_to_image
-		(game->mlx, "assets/PR.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/PR.xpm", &game->img_l, &game->img_h);
 	game->img_c = mlx_xpm_file_to_image
-		(game->mlx, "assets/C.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/C.xpm", &game->img_l, &game->img_h);
 	game->img_e = mlx_xpm_file_to_image
-		(game->mlx, "assets/E.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/E.xpm", &game->img_l, &game->img_h);
 	game->img_n = mlx_xpm_file_to_image
-		(game->mlx, "assets/NR.xpm", &game->img_l, &game->img_h);
+		(game->mlx, "textures/NR.xpm", &game->img_l, &game->img_h);
 }
 
 // create length and height of the window
@@ -74,7 +74,7 @@ void	game_init(t_game *game)
 	game->win = mlx_new_window
 		(game->mlx, game->map_length, game->map_height, "so_long");
 	game->moves = 0;
-	game->rip_anim = 1;
+	game->c_anim = 1;
 	img_init(game);
 	get_enemy_pos(game);
 	map_draw(game);

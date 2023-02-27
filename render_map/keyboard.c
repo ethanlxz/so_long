@@ -6,11 +6,13 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:50:43 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/21 22:10:36 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/27 21:36:33 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+// when "WASD" keys are pressed, what will happen to the player x and y
 
 static void	player_key(int keycode, t_game *game)
 {
@@ -36,6 +38,8 @@ static void	player_key(int keycode, t_game *game)
 	}
 }
 
+// when arrow keys are pressed, what will happen to the player x and y
+
 static void	enemy_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_UP)
@@ -59,6 +63,8 @@ static void	enemy_key(int keycode, t_game *game)
 		enemy_a(game);
 	}
 }
+
+// Conditions if various keys are pressed
 
 static int	keypress(int keycode, t_game *game)
 {
@@ -84,5 +90,5 @@ static int	keypress(int keycode, t_game *game)
 void	game_play(t_game *game)
 {
 	mlx_hook(game->win, 2, 1L << 0, keypress, game);
-	mlx_loop_hook(game->mlx, keypress, game);
+	mlx_loop_hook(game->mlx, animation, game);
 }
