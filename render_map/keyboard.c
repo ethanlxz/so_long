@@ -6,35 +6,43 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:50:43 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 21:36:33 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:38:25 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+// {.x = 0, .y = -1} W
+// {.x = -1, .y = 0} A
+// {.x = 0, .y = 1} S
+// {.x = 1, .y = 0} D
+
 // when "WASD" keys are pressed, what will happen to the player x and y
 
 static void	player_key(int keycode, t_game *game)
 {
+	t_point	move;
+
+	move = (t_point){.x = 0, .y = 0};
 	if (keycode == KEY_W)
 	{
-		game->player_y -= 1;
-		player_w(game);
+		move.y -= 1;
+		player_move(game, move, 'w');
 	}
 	else if (keycode == KEY_S)
 	{
-		game->player_y += 1;
-		player_s(game);
+		move.y += 1;
+		player_move(game, move, 's');
 	}
 	else if (keycode == KEY_D)
 	{
-		game->player_x += 1;
-		player_d(game);
+		move.x += 1;
+		player_move(game, move, 'd');
 	}
 	else if (keycode == KEY_A)
 	{
-		game->player_x -= 1;
-		player_a(game);
+		move.x -= 1;
+		player_move(game, move, 'a');
 	}
 }
 
@@ -42,25 +50,28 @@ static void	player_key(int keycode, t_game *game)
 
 static void	enemy_key(int keycode, t_game *game)
 {
+	t_point	move;
+
+	move = (t_point){.x = 0, .y = 0};
 	if (keycode == KEY_UP)
 	{
-		game->enemy_y -= 1;
-		enemy_w(game);
+		move.y -= 1;
+		enemy_move(game, move, 'w');
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		game->enemy_y += 1;
-		enemy_s(game);
+		move.y += 1;
+		enemy_move(game, move, 's');
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		game->enemy_x += 1;
-		enemy_d(game);
+		move.x += 1;
+		enemy_move(game, move, 'd');
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		game->enemy_x -= 1;
-		enemy_a(game);
+		move.x -= 1;
+		enemy_move(game, move, 'a');
 	}
 }
 

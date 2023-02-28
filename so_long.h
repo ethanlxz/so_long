@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 13:07:27 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 21:46:24 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:38:45 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,9 @@ void	tombstone_draw(t_game *game);
 
 void	game_play(t_game *game);
 
-void	player_w(t_game *game);
-void	player_a(t_game *game);
-void	player_s(t_game *game);
-void	player_d(t_game *game);
+void	player_move(t_game *game, t_point move, char key);
 
-void	enemy_w(t_game *game);
-void	enemy_a(t_game *game);
-void	enemy_s(t_game *game);
-void	enemy_d(t_game *game);
+void	enemy_move(t_game *game, t_point move, char key);
 
 int		path_checker(t_game *game);
 

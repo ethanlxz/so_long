@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:00:02 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 22:00:31 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 16:03:46 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	get_map(int ac, char **av, t_game *game)
 		}
 		if (check_map(game))
 			return (1);
-		printf("checking2 \n");
 	}
 	return (0);
 }

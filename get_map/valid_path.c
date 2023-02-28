@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:45:38 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/18 17:44:49 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 16:03:52 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ char	**map_dup(t_game *game)
 	return (map);
 }
 
-// After floodfill , 'E' will be replaced with 'F'
+// After floodfill , 'E' 'C' will be replaced with 'F'
 // If 'E' is not found means there's a valid path from starting point
 // If not , then there's no path from starting point to 'E'
 
-int	check_e(char **map)
+int	check_ce(char **map)
 {
 	int	x;
 	int	y;
@@ -89,7 +89,7 @@ int	check_e(char **map)
 		x = 0;
 		while (map[y][x] != 0)
 		{
-			if (map[y][x] == 'E')
+			if (map[y][x] == 'E' || map[y][x] == 'C')
 				return (0);
 			x++;
 		}
@@ -114,7 +114,7 @@ int	path_checker(t_game *game)
 	begin.x = game->player_x;
 	begin.y = game->player_y;
 	flood_fill(map, size, begin);
-	if (!check_e(map))
+	if (!check_ce(map))
 	{
 		free_map(map, game->map_height);
 		return (0);

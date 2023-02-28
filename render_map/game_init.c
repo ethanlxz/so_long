@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:04:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 21:35:00 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:19:09 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,6 @@ static void	size_window_init(t_game *game)
 	game->map_height = i * 64 + 64;
 }
 
-// gets the enemy position
-
-void	get_enemy_pos(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = -1;
-	while (game->map[++y] != 0)
-	{
-		x = -1;
-		while (game->map[y][++x] != 0)
-		{
-			if (game->map[y][x] == 'E')
-			{
-				game->enemy_x = x;
-				game->enemy_y = y;
-			}
-		}
-	}
-}
-
 // game initiation
 
 void	game_init(t_game *game)
@@ -76,6 +54,5 @@ void	game_init(t_game *game)
 	game->moves = 0;
 	game->c_anim = 1;
 	img_init(game);
-	get_enemy_pos(game);
 	map_draw(game);
 }

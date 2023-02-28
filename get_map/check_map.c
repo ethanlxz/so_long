@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:05:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/21 19:36:51 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:24:28 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,12 @@ static int	check_length(t_game *game)
 	int	len;
 	int	y;
 
-	y = 0;
-	len = 0;
-	while (y < game->map_height)
+	y = -1;
+	while (++y < game->map_height)
 	{
-		while (game->map[y][len] != 0)
-			len++;
+		len = ft_strlen(game->map[y]);
 		if (len != game->map_length)
 			return (0);
-		if (len == game->map_height)
-			return (0);
-		y++;
-		len = 0;
 	}
 	return (1);
 }
@@ -88,7 +82,7 @@ static int	count_pec(t_game *game)
 				game->total_c++;
 		}
 	}
-	if (p != 1 || game->total_c == 0 || e == 0)
+	if (p != 1 || game->total_c == 0 || e != 1)
 		return (0);
 	return (1);
 }

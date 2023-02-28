@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:46:51 by etlaw             #+#    #+#             */
-/*   Updated: 2023/02/27 21:47:08 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/02/28 17:28:13 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,125 +30,37 @@ static void	player_update_image(char key, t_game *game)
 			(game->mlx, "textures/PL.xpm", &game->img_l, &game->img_h);
 }
 
-// First "IF" checks whether player is going to exit 
-// and has collected all collectables.
+// if player collected all the 'C' and went to 'E'
 
-// Second "ELSE IF" checks whether player is going to enemy position
-// and will explode and become a tombstone.
-
-// Third "ELSE IF" checks whether player is going into a wall
-// or exit which can't be exited due to uncollected collectibles.
-
-// "ELSE" just let the player roam around the map
-// and collect collectibles.
-
-void	player_w(t_game *game)
+static void	win_game(t_game *game)
 {
-	player_update_image('w', game);
-	if (game->map[game->player_y][game->player_x] == 'E' && game->total_c == 0)
-	{
-		mlx_clear_window(game->mlx, game->win);
-		game->map[game->player_y + 1][game->player_x] = '0';
-		game->moves++;
-		ft_printf("\033[0;32mYou won! :D\n\033[0m");
-		exit_game(game);
-	}
-	else if (game->map[game->player_y][game->player_x] == 'N')
-		lose_game(game);
-	else if (game->map[game->player_y][game->player_x] == '1'
-			|| game->map[game->player_y][game->player_x] == 'E')
-		game->player_y += 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->player_y][game->player_x] == 'C')
-			game->total_c -= 1;
-		game->map[game->player_y][game->player_x] = 'P';
-		game->map[game->player_y + 1][game->player_x] = '0';
-		game->moves++;
-		map_draw(game);
-	}
+	mlx_clear_window(game->mlx, game->win);
+	ft_printf("\033[0;32mYou won! :D\n\033[0m");
+	exit_game(game);
 }
 
-void	player_s(t_game *game)
-{
-	player_update_image('s', game);
-	if (game->map[game->player_y][game->player_x] == 'E' && game->total_c == 0)
-	{
-		mlx_clear_window(game->mlx, game->win);
-		game->map[game->player_y - 1][game->player_x] = '0';
-		game->moves++;
-		ft_printf("\033[0;32mYou won! :D\n\033[0m");
-		exit_game(game);
-	}
-	else if (game->map[game->player_y][game->player_x] == 'N')
-		lose_game(game);
-	else if (game->map[game->player_y][game->player_x] == '1'
-			|| game->map[game->player_y][game->player_x] == 'E')
-		game->player_y -= 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->player_y][game->player_x] == 'C')
-			game->total_c -= 1;
-		game->map[game->player_y][game->player_x] = 'P';
-		game->map[game->player_y - 1][game->player_x] = '0';
-		game->moves++;
-		map_draw(game);
-	}
-}
+// player move conditions
 
-void	player_d(t_game *game)
+void	player_move(t_game *game, t_point move, char key)
 {
-	player_update_image('d', game);
-	if (game->map[game->player_y][game->player_x] == 'E' && game->total_c == 0)
-	{
-		mlx_clear_window(game->mlx, game->win);
-		game->map[game->player_y][game->player_x - 1] = '0';
-		game->moves++;
-		ft_printf("\033[0;32mYou won! :D\n\033[0m");
-		exit_game(game);
-	}
-	else if (game->map[game->player_y][game->player_x] == 'N')
-		lose_game(game);
-	else if (game->map[game->player_y][game->player_x] == '1'
-			|| game->map[game->player_y][game->player_x] == 'E')
-		game->player_x -= 1;
-	else
-	{
-		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->player_y][game->player_x] == 'C')
-			game->total_c -= 1;
-		game->map[game->player_y][game->player_x] = 'P';
-		game->map[game->player_y][game->player_x - 1] = '0';
-		game->moves++;
-		map_draw(game);
-	}
-}
+	const t_point	to = (t_point)
+	{.x = game->player_x + move.x, .y = game->player_y + move.y};
+	const char		tileto = game->map[to.y][to.x];
 
-void	player_a(t_game *game)
-{
-	player_update_image('a', game);
-	if (game->map[game->player_y][game->player_x] == 'E' && game->total_c == 0)
-	{
-		mlx_clear_window(game->mlx, game->win);
-		game->map[game->player_y][game->player_x + 1] = '0';
-		game->moves++;
-		ft_printf("\033[0;32mYou won! :D\n\033[0m");
-		exit_game(game);
-	}
-	else if (game->map[game->player_y][game->player_x] == 'N')
+	player_update_image(key, game);
+	if (tileto == 'E' && game->total_c == 0)
+		win_game(game);
+	else if (tileto == 'N')
 		lose_game(game);
-	else if (game->map[game->player_y][game->player_x] == '1'
-			|| game->map[game->player_y][game->player_x] == 'E')
-		game->player_x += 1;
+	else if (tileto == '1' || tileto == 'E')
+		return ;
 	else
 	{
 		mlx_clear_window(game->mlx, game->win);
-		if (game->map[game->player_y][game->player_x] == 'C')
+		if (tileto == 'C')
 			game->total_c -= 1;
-		game->map[game->player_y][game->player_x] = 'P';
-		game->map[game->player_y][game->player_x + 1] = '0';
+		game->map[to.y][to.x] = 'P';
+		game->map[game->player_y][game->player_x] = '0';
 		game->moves++;
 		map_draw(game);
 	}
